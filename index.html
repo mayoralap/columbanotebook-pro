@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Columba Notebook – Acceso y Verificación</title>
+  <title>Columba Notebook – Planes de Suscripción</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     :root {
@@ -13,13 +13,12 @@
       --color-success: #28a745;
     }
 
-    /* OCULTO INICIALMENTE HASTA VALIDAR ACCESO */
     body {
       font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       background: #f5f7fb;
       margin: 0;
       padding: 0;
-      display: none; /* Se abrirá como flex o block al aprobar */
+      display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
@@ -84,6 +83,7 @@
       line-height: 1.5;
     }
 
+    /* REGLA MAESTRA DE OCULTAMIENTO ABSOLUTO */
     .hidden {
       display: none !important;
     }
@@ -277,48 +277,51 @@
 
   <div class="main-card">
 
-    <!-- BLOQUE 1: VERIFICACIÓN GOOGLE (VISIBLE AL INICIO SI NO HAY SESIÓN) -->
+    <!-- BLOQUE 1: VERIFICACIÓN GOOGLE (VISIBLE AL INICIO) -->
     <div id="googleAuthBox" class="google-auth-container">
       <img src="https://drive.google.com/thumbnail?id=15hTMpm_5aNuU2QKTWZGdK2XKdtpEog4w" alt="Logo Columba" style="width:100px; margin-bottom:20px;">
       <h2 style="font-size:1.5rem; color:#202124; margin:0 0 10px 0;">Verificación de Identidad</h2>
       <p style="color:#5f6368; max-width:380px; margin:0 0 24px 0; font-size:0.95rem; line-height:1.4;">
-        Inicia sesión con Google para validar el estado de tu cuenta en Columba Notebook Pro.
+        Para verificar el estado de tu cuenta y mostrarte las opciones correspondientes, inicia sesión con Google.
       </p>
       <div id="buttonDiv"></div>
     </div>
 
-    <!-- BLOQUE 2: MENSAJE PARA USUARIO NO REGISTRADO / INACTIVO -->
+    <!-- BLOQUE 2: MENSAJE PARA USUARIO NO REGISTRADO (OCULTO POR DEFECTO) -->
     <div id="registrationActionBox" class="action-box"></div>
 
-    <!-- BLOQUE 3: CONTENIDO PRINCIPAL / PLANES (SE MUESTRA SI LA SUSCRIPCIÓN ESTÁ VIGENTE) -->
+    <!-- BLOQUE 3: ENCABEZADO Y PLANES (ESTRICTAMENTE OCULTOS CON CLASS HIDDEN) -->
     <div class="header-flexible hidden" id="plansHeader">
       <div class="logo-card">
         <img src="https://drive.google.com/thumbnail?id=15hTMpm_5aNuU2QKTWZGdK2XKdtpEog4w" alt="Logo Columba Notebook Pro" class="header-logo">
       </div>
       <div class="header-text-centered">
-        <h1 class="titulo-pagina">Gestión de Suscripción Pro</h1>
-        <p class="text-muted">Estado actual de tu cuenta y opciones de renovación.</p>
+        <h1 class="titulo-pagina">Elige tu plan en Columba Notebook Pro</h1>
+        <p class="text-muted">Selecciona el nivel de acceso que mejor se adapte a tus necesidades. Ambas opciones incluyen el conjunto completo de herramientas Pro.</p>
       </div>
     </div>
 
     <div id="infoSuscripcion" class="info-suscripcion-box"></div>
 
+    <!-- BANNER PREVENTIVO POST-PAGO (Se muestra junto con las tarjetas cuando están habilitadas) -->
     <div id="paymentAlertBanner" class="alert-banner hidden">
       <strong>⚠️ ¿Realizaste tu pago recientemente?</strong><br>
-      La confirmación por parte de Stripe puede tardar hasta <strong>72 horas</strong>.<br>
-      <strong>Por favor, evita realizar pagos duplicados.</strong>
+      La confirmación por parte de Stripe y la sincronización pueden tardar hasta <strong>72 horas</strong>.<br>
+      <strong>Por favor, evita realizar pagos duplicados o reintentar la compra.</strong><br>
+      Si transcurrido ese tiempo tu acceso no se actualiza, contacta al administrador.
     </div>
 
     <div class="pricing-container hidden" id="plansContainer">
-      <!-- PLAN MENSUAL -->
+      
+      <!-- TARJETA: PLAN MENSUAL -->
       <div class="card plan-card">
         <div class="card-title">Plan Mensual Pro</div>
         <div class="card-subtitle">Pago recurrente mes a mes.</div>
         <div class="card-body">
           <ul>
-            <li><strong>Módulo Ejemplares:</strong> Control de existencias e informes.</li>
-            <li><strong>Módulo Conquistas:</strong> Registros y estadísticas por año.</li>
-            <li><strong>Soporte Técnico:</strong> Atención vía correo electrónico.</li>
+            <li><strong>Módulo Ejemplares:</strong> Control de existencias, informes generales e individuales.</li>
+            <li><strong>Módulo Conquistas:</strong> Registro detallado con imágenes, estadísticas por año y capturas.</li>
+            <li><strong>Soporte Técnico:</strong> Atención estándar vía correo electrónico.</li>
           </ul>
         </div>
         <div class="card-footer">
@@ -328,15 +331,15 @@
         </div>
       </div>
 
-      <!-- PLAN ANUAL -->
+      <!-- TARJETA: PLAN ANUAL -->
       <div class="card featured plan-card">
         <div class="card-title">Plan Anual Pro</div>
         <div class="card-subtitle">Un solo pago al año (12 meses continuos).</div>
         <div class="card-body">
           <ul>
-            <li><strong>Módulo Ejemplares:</strong> Control de existencias e informes.</li>
-            <li><strong>Módulo Conquistas:</strong> Registros y estadísticas por año.</li>
-            <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria.</li>
+            <li><strong>Módulo Ejemplares:</strong> Control de existencias, informes generales e individuales.</li>
+            <li><strong>Módulo Conquistas:</strong> Registro detallado con imágenes, estadísticas por año y capturas.</li>
+            <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria con el desarrollador.</li>
           </ul>
         </div>
         <div class="card-footer">
@@ -345,6 +348,7 @@
           </stripe-buy-button>
         </div>
       </div>
+
     </div>
 
   </div>
@@ -358,21 +362,58 @@
     const DB_VERSION = 2;
     const STORE_NAME = "clients";
 
-    // Al cargar la página, intentamos recuperar el correo previamente guardado en localStorage o IndexedDB
-    window.onload = async function () {
-      const emailGuardado = localStorage.getItem("user_email") || "";
-      
-      if (emailGuardado) {
-        // Si ya tenemos un correo registrado localmente, verificamos directo con el backend de Apps Script
-        verificarConServidor(emailGuardado);
-      } else {
-        // Si no hay rastro, mostramos el botón de Google Sign-In exactamente igual que en GitHub
-        document.body.style.display = "flex";
-        inicializarGoogleSignID();
-      }
-    };
+    function abrirIndexedDB() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME, { keyPath: "email" });
+          }
+        };
+      });
+    }
 
-    function inicializarGoogleSignID() {
+    async function guardarSesionLocal(data) {
+      try {
+        const db = await abrirIndexedDB();
+        return new Promise((resolve, reject) => {
+          const transaction = db.transaction(STORE_NAME, "readwrite");
+          const store = transaction.objectStore(STORE_NAME);
+          const registro = {
+            email: (data.email || "").trim().toLowerCase(),
+            action: data.action || "",
+            version: data.version || "",
+            tipo: data.tipo || "",
+            customer_id: data.customer_id || "",
+            price_id: data.price_id || "",
+            estado: data.estado || "",
+            fec_vence: data.fec_vence || "",
+            fec_ult_act: data.fec_ult_act || "",
+            actualizado: new Date().toISOString()
+          };
+          const request = store.put(registro);
+          request.onsuccess = () => resolve(true);
+          request.onerror = () => reject(request.error);
+        });
+      } catch (error) {
+        console.error("Error IndexedDB:", error);
+      }
+    }
+
+    function abrirVentanaRegistro() {
+      window.open('https://forms.gle/gFChbGjRsHNwgFQX7', 'registroPopup', 'width=auto,height=auto,resizable=yes,scrollbars=yes');
+    }
+
+    function cambiarCuentaGoogle(event) {
+      if (event) event.preventDefault();
+      google.accounts.id.disableAutoSelect();
+      location.reload();
+    }
+
+    window.onload = function () {
       google.accounts.id.initialize({
         client_id: "839165918275-r1s1cvia9uhp843u6hcic91sntasd1q6.apps.googleusercontent.com",
         callback: manejarRespuestaGoogle,
@@ -385,7 +426,9 @@
         document.getElementById("buttonDiv"),
         { theme: "outline", size: "large", text: "signin_with", shape: "rectangular" }
       );
-    }
+
+      google.accounts.id.prompt();
+    };
 
     function manejarRespuestaGoogle(response) {
       try {
@@ -398,64 +441,105 @@
         const objetoUsuario = JSON.parse(jsonPayload);
         const emailVerificado = objetoUsuario.email;
 
-        // Guardamos en localStorage para futuras visitas automáticas
-        localStorage.setItem("user_email", emailVerificado);
         document.getElementById("googleAuthBox").classList.add("hidden");
 
-        verificarConServidor(emailVerificado);
+        ejecutarVerificacionDeAcceso(emailVerificado);
       } catch (error) {
         handleAccess("not_registered", null, "");
       }
     }
 
-    function verificarConServidor(email) {
-      // Si estamos en entorno de prueba local fuera de Apps Script sin google.script.run
-      if (typeof google === 'undefined' || !google.script || !google.script.run) {
-        console.warn("Entorno de prueba local detectado. Simulando acceso...");
-        document.body.style.display = "flex";
-        return;
-      }
+    async function ejecutarVerificacionDeAcceso(emailLimpio) {
+      const emailRaw = emailLimpio.trim();
+      const emailNormalizado = emailRaw.toLowerCase();
+      const projectId = "columbanotebook-pro"; 
+      
+      let urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailNormalizado)}`;
 
-      // Llamada segura a tu función puente en el servidor (.gs)
-      google.script.run
-        .withSuccessHandler(function(respuesta) {
-          // Revelamos el body una vez que el servidor responde
-          document.body.style.display = "flex";
-          
-          if (respuesta && respuesta.accesoValido) {
-            document.getElementById("googleAuthBox").classList.add("hidden");
-            
-            // Si es válido, preparamos los datos para la interfaz
-            const userData = {
-              estado: 'complete',
-              action: respuesta.action || 'Autorizado',
-              version: 'Pro',
-              fec_vence: respuesta.fec_vence || '',
-              fec_vence_obj: respuesta.fec_vence ? new Date(respuesta.fec_vence) : null
-            };
-            handleAccess("registered", userData, email);
-          } else {
-            // Acceso denegado o no registrado
-            handleAccess("not_registered", null, email);
+      try {
+        let respuesta = await fetch(urlFirestore);
+
+        if (!respuesta.ok && emailRaw !== emailNormalizado) {
+          urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailRaw)}`;
+          respuesta = await fetch(urlFirestore);
+        }
+
+        if (!respuesta.ok) {
+          handleAccess("not_registered", null, emailRaw);
+          return;
+        }
+
+        const datosUsuario = await respuesta.json();
+        const campos = datosUsuario.fields;
+
+        if (!campos) {
+          handleAccess("not_registered", null, emailRaw);
+          return;
+        }
+
+        const emailVal = campos.email?.stringValue || emailRaw;
+        const actionVal = campos.action?.stringValue || "";
+        const versionVal = campos.version?.stringValue || "";
+        const tipoVal = campos.tipo?.stringValue || "";
+        const customerIdVal = campos.customer_id?.stringValue || "";
+        const priceIdVal = campos.price_id?.stringValue || "";
+
+        let estadoFila = campos.estado?.stringValue?.trim().toLowerCase() || "";
+        const actionValLower = actionVal.trim().toLowerCase();
+        const estadosActivosPermitidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
+
+        if (!estadoFila || !estadosActivosPermitidos.includes(estadoFila)) {
+          if (estadosActivosPermitidos.includes(actionValLower)) {
+            estadoFila = "complete"; 
           }
-        })
-        .withFailureHandler(function(err) {
-          console.error("Error de comunicación con el servidor:", err);
-          document.body.style.display = "flex";
-          handleAccess("not_registered", null, email);
-        })
-        .validarAccesoDesdeCliente(email);
-    }
+        }
 
-    function cambiarCuentaGoogle(event) {
-      if (event) event.preventDefault();
-      localStorage.removeItem("user_email");
-      google.accounts.id.disableAutoSelect();
-      location.reload();
-    }
+        let fechaVenceFormateada = "";
+        let fechaVenceObj = null;
 
-    function abrirVentanaRegistro() {
-      window.open('https://forms.gle/gFChbGjRsHNwgFQX7', 'registroPopup', 'width=auto,height=auto,resizable=yes,scrollbars=yes');
+        const fecVenceRaw = campos.fec_vence?.timestampValue || campos.fec_vence?.stringValue;
+
+        if (fecVenceRaw) {
+          fechaVenceObj = new Date(fecVenceRaw);
+          if (isNaN(fechaVenceObj.getTime())) {
+            fechaVenceObj = null;
+          }
+        }
+
+        if (fechaVenceObj && !isNaN(fechaVenceObj.getTime())) {
+          fechaVenceFormateada = `${String(fechaVenceObj.getDate()).padStart(2, '0')}/${String(fechaVenceObj.getMonth() + 1).padStart(2, '0')}/${fechaVenceObj.getFullYear()}`;
+        } else if (campos.fec_vence?.stringValue) {
+          fechaVenceFormateada = campos.fec_vence.stringValue;
+        }
+
+        const fecUltActRaw = campos.fec_ult_act?.timestampValue || campos.fec_ult_act?.stringValue || "";
+
+        const datosCompletos = {
+          email: emailVal,
+          action: actionVal,
+          version: versionVal,
+          tipo: tipoVal,
+          customer_id: customerIdVal,
+          price_id: priceIdVal,
+          estado: estadoFila,
+          fec_vence: fechaVenceFormateada,
+          fec_ult_act: fecUltActRaw
+        };
+
+        await guardarSesionLocal(datosCompletos);
+        
+        handleAccess("registered", { 
+          estado: estadoFila, 
+          action: actionVal,
+          version: versionVal,
+          tipo: tipoVal,
+          fec_vence: fechaVenceFormateada, 
+          fec_vence_obj: fechaVenceObj 
+        }, emailNormalizado);
+
+      } catch (error) {
+        handleAccess("not_registered", null, emailRaw);
+      }
     }
 
     function handleAccess(status, userData, emailUser) {
@@ -464,6 +548,7 @@
       const actionBox = document.getElementById("registrationActionBox");
       const infoBox = document.getElementById("infoSuscripcion");
       const alertBanner = document.getElementById("paymentAlertBanner");
+      const cards = document.querySelectorAll(".plan-card");
 
       if (status === "not_registered") {
         header.classList.add("hidden");
@@ -472,8 +557,8 @@
         infoBox.style.display = "none";
 
         actionBox.innerHTML = `
-          <h2>Acceso No Autorizado</h2>
-          <p>El correo <strong>${emailUser || 'seleccionado'}</strong> no cuenta con una suscripción activa o registrada.<br><br>Si ya realizaste tu pago, recuerda que puede tardar un momento en sincronizarse. De lo contrario, adquiere tu plan o solicita acceso.</p>
+          <h2>Correo No Registrado</h2>
+          <p>El correo <strong>${emailUser || 'seleccionado'}</strong> no se encuentra activo en nuestro sistema.<br><br>Si acabas de completar tu registro, la activación puede tardar unas horas. De lo contrario, solicita tu acceso a continuación.</p>
           <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
             <button class="btn-columba" onclick="abrirVentanaRegistro()">Ir al Formulario de Registro</button>
             <a href="#" onclick="cambiarCuentaGoogle(event)" style="color:#5f6368; font-size:0.85rem; text-decoration:underline; margin-top:8px;">Probar con otra cuenta de Google</a>
@@ -485,16 +570,63 @@
 
       if (status === "registered" && userData) {
         actionBox.style.display = "none";
+        
         header.classList.remove("hidden");
         container.classList.remove("hidden");
 
-        // Si el usuario tiene acceso válido (o es desarrollador), podemos ocultar la tarjeta de login y dejarlo operar
-        document.getElementById("googleAuthBox").classList.add("hidden");
-        infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>¡Bienvenido!</strong> Tu sesión está activa y verificada correctamente (${emailUser}).</p>`;
-        infoBox.style.background = "#d4edda";
-        infoBox.style.color = "#155724";
-        infoBox.style.border = "1px solid #c3e6cb";
-        infoBox.style.display = "block";
+        const estado = userData.estado ? userData.estado.trim().toLowerCase() : "";
+        const action = userData.action ? userData.action.trim().toLowerCase() : "";
+        const fecVenceStr = userData.fec_vence || "N/A";
+        let diasRestantes = 0;
+        let puedeComprar = false;
+
+        const estadosValidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
+        const esActivo = estadosValidos.includes(estado) || estadosValidos.includes(action);
+
+        if (esActivo && userData.fec_vence_obj) {
+          const hoy = new Date();
+          const fechaVencimiento = new Date(userData.fec_vence_obj);
+          hoy.setHours(0, 0, 0, 0);
+          fechaVencimiento.setHours(0, 0, 0, 0);
+          diasRestantes = Math.ceil((fechaVencimiento - hoy) / (1000 * 60 * 60 * 24));
+        }
+
+        if (!esActivo) {
+          puedeComprar = true;
+          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Cuenta Inactiva:</strong> Selecciona un plan a continuación para activar tu servicio.</p>`;
+          infoBox.style.background = "#fff3cd";
+          infoBox.style.color = "#856404";
+          infoBox.style.border = "1px solid #ffeeba";
+          infoBox.style.display = "block";
+        } else if (diasRestantes <= 3) {
+          puedeComprar = true;
+          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Renovación Disponible:</strong> Tu suscripción vence en ${diasRestantes} días (${fecVenceStr}). Ya puedes realizar tu renovación.</p>`;
+          infoBox.style.background = "#e8f0fe";
+          infoBox.style.color = "#1a73e8";
+          infoBox.style.border = "1px solid #c2e7ff";
+          infoBox.style.display = "block";
+        } else {
+          puedeComprar = false;
+          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Suscripción Activa (${userData.version || 'General'}):</strong> Vigente hasta el ${fecVenceStr} (Quedan ${diasRestantes} días).<br><small>Las opciones de compra están deshabilitadas para evitar pagos duplicados.</small></p>`;
+          infoBox.style.background = "#d4edda";
+          infoBox.style.color = "#155724";
+          infoBox.style.border = "1px solid #c3e6cb";
+          infoBox.style.display = "block";
+        }
+
+        if (puedeComprar) {
+          alertBanner.classList.remove("hidden");
+        } else {
+          alertBanner.classList.add("hidden");
+        }
+
+        cards.forEach(c => {
+          if (puedeComprar) {
+            c.classList.remove("blocked");
+          } else {
+            c.classList.add("blocked");
+          }
+        });
       }
     }
   </script>
