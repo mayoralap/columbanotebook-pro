@@ -464,13 +464,235 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-<script>
-function getEndpoint(){return"https://docs.google.com/spreadsheets/d/1Vf6YTKbGRR2LsEJ2JKJdrCQLY9o57z5Vh9O7IvJ21qE/gviz/tq?tqx=out:csv&sheet=Auth"}
-function abrirVentanaRegistro(){window.open("https://forms.gle/FnmNY8HFqmhM2JyV8","registroPopup","width=auto,height=auto,resizable=yes,scrollbars=yes")}
-window.onload=function(){google.accounts.id.initialize({client_id:"839165918275-r1s1cvia9uhp843u6hcic91sntasd1q6.apps.googleusercontent.com",callback:manejarRespuestaGoogle,context:"signin",ux_mode:"popup",auto_select:!0});google.accounts.id.renderButton(document.getElementById("buttonDiv"),{theme:"outline",size:"large",text:"signin_with",shape:"rectangular"});google.accounts.id.prompt()};
-function manejarRespuestaGoogle(_r){try{const _b1=_r.credential.split('.')[1];const _b2=_b1.replace(/-/g,'+').replace(/_/g,'/');const _jp=decodeURIComponent(atob(_b2).split('').map(function(_c){return'%'+('00'+_c.charCodeAt(0).toString(16)).slice(-2)}).join(''));const _ou=JSON.parse(_jp);const _ev=_ou.email;document.getElementById("googleAuthBox").classList.add("hidden");ejecutarVerificacionDeAcceso(_ev)}catch(_e){handleAccess("not_registered")}}
-function handleAccess(_s,_u=null){const _c=document.querySelectorAll(".plan-card");const _a=document.getElementById("registrationActionBox");const _h=document.getElementById("plansHeader");const _cn=document.getElementById("plansContainer");const _i=document.getElementById("infoSuscripcion");const _bp=document.getElementById("btnPremiumAnual");_h.classList.remove("hidden");_cn.classList.remove("hidden");_a.style.display="none";_i.style.display="none";if(_s==="admin"){_c.forEach(_x=>{_x.classList.remove("blocked");_x.style.pointerEvents="auto"});if(_bp){_bp.style.pointerEvents="auto";_bp.style.opacity="1";_bp.style.filter="none"}_i.innerHTML='<p style="margin:0; font-size:0.95rem; line-height:1.5;"><strong>Modo Administrador:</strong> Acceso total de desarrollo concedido.</p>';_i.style.background="#e8f0fe";_i.style.color="#1a73e8";_i.style.border="1px solid #c2e7ff";_i.style.display="block";return}if(_s==="not_registered"){_c.forEach(_x=>_x.classList.add("blocked"));_h.classList.add("hidden");_cn.classList.add("hidden");_i.style.display="none";_a.innerHTML='<h2>Acceso restringido</h2><p>Tu correo electrónico no se encuentra registrado en nuestro sistema.<br>Por favor, realiza tu registro inicial para continuar.</p><button class="btn-columba" onclick="abrirVentanaRegistro()">Gestionar Acceso</button>';_a.style.display="block";return}if(_s==="registered"&&_u){const _e=_u.estado?_u.estado.trim().toLowerCase():"";const _f=_u.fec_vence||"";let _pc=!1;let _mi="";if(_e!=="active"){_pc=!0;_mi=`<strong>Estado de Cuenta:</strong> Inactivo / Vencido (Vencimiento anterior: ${_f||'Ninguno'}). Elige un plan a continuación para renovar tu suscripción.`;_i.style.background="#fff3cd";_i.style.color="#856404";_i.style.border="1px solid #ffeeba"}else{let _dr=999;if(_u.fec_vence_obj&&!isNaN(_u.fec_vence_obj.getTime())){const _hoy=new Date();const _fv=new Date(_u.fec_vence_obj);_hoy.setHours(0,0,0,0);_fv.setHours(0,0,0,0);const _dt=_fv-_hoy;_dr=Math.ceil(_dt/(1000*60*60*24))}if(_dr<=3){_pc=!0;_mi=`<strong>Suscripción Activa:</strong> Tu cuenta vence pronto el ${_f} (Te quedan ${_dr} días). Tienes permitido realizar tu renovación anticipada seleccionando un plan.`;_i.style.background="#e8f0fe";_i.style.color="#1a73e8";_i.style.border="1px solid #c2e7ff"}else{_pc=!1;_mi=`<strong>Suscripción Activa:</strong> Tu cuenta se encuentra vigente hasta el ${_f}. No necesitas adquirir otro plan por ahora. Los botones de compra se habilitarán automáticamente cuando falten 3 días o menos para tu vencimiento.`;_i.style.background="#d4edda";_i.style.color="#155724";_i.style.border="1px solid #c3e6cb"}}_i.innerHTML=`<p style="margin:0; font-size:0.95rem; line-height:1.5;">${_mi}</p>`;_i.style.display="block";if(_pc){_c.forEach(_x=>{_x.classList.remove("blocked");_x.style.pointerEvents="auto"});if(_bp){_bp.style.pointerEvents="auto";_bp.style.opacity="1";_bp.style.filter="none"}}else{_c.forEach(_x=>{_x.classList.add("blocked");_x.style.pointerEvents="none"});if(_bp){_bp.style.pointerEvents="none";_bp.style.opacity="0.4";_bp.style.filter="grayscale(100%)"}}}}
-async function ejecutarVerificacionDeAcceso(_em){const _uf=`https://firestore.googleapis.com/v1/projects/columbanotebook/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(_em.trim().toLowerCase())}`;try{const _r=await fetch(_uf);if(_r.status===404){handleAccess("not_registered");return}if(!_r.ok)throw new Error("E");const _d=await _r.json();const _f=_d.fields;if(!_f){handleAccess("not_registered");return}const _ef=_f.estado&&_f.estado.stringValue?_f.estado.stringValue.trim().toLowerCase():"";let _fvf="";let _fvo=null;if(_f.fec_vence&&_f.fec_vence.timestampValue){_fvo=new Date(_f.fec_vence.timestampValue);if(!isNaN(_fvo.getTime())){const _d=String(_fvo.getDate()).padStart(2,'0');const _m=String(_fvo.getMonth()+1).padStart(2,'0');const _a=_fvo.getFullYear();const _h=String(_fvo.getHours()).padStart(2,'0');const _min=String(_fvo.getMinutes()).padStart(2,'0');const _s=String(_fvo.getSeconds()).padStart(2,'0');_fvf=`${_d}/${_m}/${_a} ${_h}:${_min}:${_s}`}}const _ue={estado:_ef,fec_vence:_fvf,fec_vence_obj:_fvo};handleAccess("registered",_ue)}catch(_er){handleAccess("not_registered")}}
+  <script>
+    function abrirVentanaRegistro() {
+      window.open('https://forms.gle/gFChbGjRsHNwgFQX7', 'registroPopup', 'width=auto,height=auto,resizable=yes,scrollbars=yes');
+    }
+
+    // Inicialización del servicio de Google Identity al cargar la ventana
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "839165918275-r1s1cvia9uhp843u6hcic91sntasd1q6.apps.googleusercontent.com", 
+            callback: manejarRespuestaGoogle,
+            context: "signin",
+            ux_mode: "popup",
+            auto_select: true 
+        });
+
+        // Renderiza el botón visual nativo de Google
+        google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large", text: "signin_with", shape: "rectangular" }
+        );
+
+        // Despliega el One Tap automático en la esquina si es posible
+        google.accounts.id.prompt();
+    };
+
+    // Callback ejecutado cuando el usuario se autentica exitosamente con Google
+    function manejarRespuestaGoogle(response) {
+        try {
+            // Un token JWT tiene 3 partes separadas por puntos. La segunda parte (índice 1) es el Payload base64
+            const base64Url = response.credential.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            const objetoUsuario = JSON.parse(jsonPayload);
+            const emailVerificado = objetoUsuario.email;
+
+            console.log("INFORMÁTICA: Identidad verificada criptográficamente por Google:", emailVerificado);
+            
+            // Ocultamos el prompt inicial de login e iniciamos la verificación en la hoja de cálculo
+            document.getElementById("googleAuthBox").classList.add("hidden");
+            ejecutarVerificacionDeAcceso(emailVerificado);
+
+        } catch (error) {
+            console.error("ERROR: No se pudo decodificar el token de Google:", error);
+            handleAccess("not_registered");
+        }
+    }
+
+    function handleAccess(status, userData = null) {
+        const cards = document.querySelectorAll(".plan-card");
+        const actionBox = document.getElementById("registrationActionBox");
+        const header = document.getElementById("plansHeader");
+        const container = document.getElementById("plansContainer");
+        const infoBox = document.getElementById("infoSuscripcion");
+        const btnPremium = document.getElementById("btnPremiumAnual");
+
+        // Activamos visibilidad estructural de contenedores
+        header.classList.remove("hidden");
+        container.classList.remove("hidden");
+        actionBox.style.display = "none";
+        infoBox.style.display = "none";
+
+        if (status === "admin") {
+            cards.forEach(c => {
+                c.classList.remove("blocked");
+                c.style.pointerEvents = "auto"; 
+            });
+            if (btnPremium) {
+                btnPremium.style.pointerEvents = "auto";
+                btnPremium.style.opacity = "1";
+                btnPremium.style.filter = "none";
+            }
+            infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem; line-height:1.5;"><strong>Modo Administrador:</strong> Acceso total de desarrollo concedido.</p>`;
+            infoBox.style.background = "#e8f0fe"; 
+            infoBox.style.color = "#1a73e8";
+            infoBox.style.border = "1px solid #c2e7ff";
+            infoBox.style.display = "block";
+            return;
+        }
+
+        if (status === "not_registered") {
+            cards.forEach(c => c.classList.add("blocked"));
+            header.classList.add("hidden");
+            container.classList.add("hidden");
+            infoBox.style.display = "none";
+
+            actionBox.innerHTML = `
+                <h2>Acceso restringido</h2>
+                <p>Tu correo electrónico no se encuentra registrado en nuestro sistema.<br>Por favor, realiza tu registro inicial para continuar.</p>
+                <button class="btn-columba" onclick="abrirVentanaRegistro()">Gestionar Acceso</button>
+            `;
+            actionBox.style.display = "block";
+            return;
+        } 
+        
+        if (status === "registered" && userData) {
+            const estado = userData.estado ? userData.estado.trim().toLowerCase() : "";
+            const fecVenceStr = userData.fec_vence || "";
+            
+            let puedeComprar = false;
+            let mensajeInfo = "";
+
+            if (estado !== "active") {
+                puedeComprar = true;
+                mensajeInfo = `<strong>Estado de Cuenta:</strong> Inactivo / Vencido (Vencimiento anterior: ${fecVenceStr || 'Ninguno'}). Elige un plan a continuación para renovar tu suscripción.`;
+                infoBox.style.background = "#fff3cd"; 
+                infoBox.style.color = "#856404";
+                infoBox.style.border = "1px solid #ffeeba";
+            } else {
+                let diasRestantes = 999;
+                
+                // CONTROL ANALÍTICO: Usamos el objeto Date nativo que preservamos para calcular los días restantes de forma exacta
+                if (userData.fec_vence_obj && !isNaN(userData.fec_vence_obj.getTime())) {
+                    const hoy = new Date();
+                    const fechaVencimiento = new Date(userData.fec_vence_obj);
+                    
+                    hoy.setHours(0, 0, 0, 0);
+                    fechaVencimiento.setHours(0, 0, 0, 0);
+                    
+                    const diffTime = fechaVencimiento - hoy;
+                    diasRestantes = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                }
+
+                if (diasRestantes <= 3) {
+                    puedeComprar = true;
+                    mensajeInfo = `<strong>Suscripción Activa:</strong> Tu cuenta vence pronto el ${fecVenceStr} (Te quedan ${diasRestantes} días). Tienes permitido realizar tu renovación anticipada seleccionando un plan.`;
+                    infoBox.style.background = "#e8f0fe"; 
+                    infoBox.style.color = "#1a73e8";
+                    infoBox.style.border = "1px solid #c2e7ff";
+                } else {
+                    puedeComprar = false;
+                    mensajeInfo = `<strong>Suscripción Activa:</strong> Tu cuenta se encuentra vigente hasta el ${fecVenceStr}. No necesitas adquirir otro plan por ahora. Los botones de compra se habilitarán automáticamente cuando falten 3 días o menos para tu vencimiento.`;
+                    infoBox.style.background = "#d4edda"; 
+                    infoBox.style.color = "#155724";
+                    infoBox.style.border = "1px solid #c3e6cb";
+                }
+            }
+
+            infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem; line-height:1.5;">${mensajeInfo}</p>`;
+            infoBox.style.display = "block";
+
+            if (puedeComprar) {
+                cards.forEach(c => {
+                    c.classList.remove("blocked");
+                    c.style.pointerEvents = "auto"; 
+                });
+                if (btnPremium) {
+                    btnPremium.style.pointerEvents = "auto";
+                    btnPremium.style.opacity = "1";
+                    btnPremium.style.filter = "none";
+                }
+            } else {
+                cards.forEach(c => {
+                    c.classList.add("blocked");
+                    c.style.pointerEvents = "none"; 
+                });
+                if (btnPremium) {
+                    btnPremium.style.pointerEvents = "none";
+                    btnPremium.style.opacity = "0.4";
+                    btnPremium.style.filter = "grayscale(100%)";
+                }
+            }
+        }
+    }
+
+    async function ejecutarVerificacionDeAcceso(emailLimpio) {
+        console.log("DEBUG: Consultando DB en tiempo real para el usuario:", emailLimpio);
+        
+        const projectId = "columbanotebook-pro";
+        // Petición directa a la API REST de Firestore (evita por completo la caché de Sheets)
+        const urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailLimpio.trim().toLowerCase())}`;
+
+        try {
+            const respuesta = await fetch(urlFirestore);
+            
+            if (respuesta.status === 404) {
+                console.warn("DEBUG: Usuario no registrado en Firestore.");
+                handleAccess("not_registered");
+                return;
+            }
+
+            if (!respuesta.ok) throw new Error("Error de conexión con el backend de Firestore.");
+
+            const datosUsuario = await respuesta.json();
+            const campos = datosUsuario.fields;
+
+            if (!campos) {
+                handleAccess("not_registered");
+                return;
+            }
+
+            // Extracción limpia de las propiedades stringValue y timestampValue
+            const estadoFila = campos.estado && campos.estado.stringValue ? campos.estado.stringValue.trim().toLowerCase() : "";
+            
+            let fechaVenceFormateada = "";
+            let fechaVenceObj = null;
+
+            if (campos.fec_vence && campos.fec_vence.timestampValue) {
+                // Parseo nativo del String ISO UTC que viene directo de Firebase
+                fechaVenceObj = new Date(campos.fec_vence.timestampValue);
+                
+                if (!isNaN(fechaVenceObj.getTime())) {
+                    const dia = String(fechaVenceObj.getDate()).padStart(2, '0');
+                    const mes = String(fechaVenceObj.getMonth() + 1).padStart(2, '0'); // Corrección mes base 0
+                    const anio = fechaVenceObj.getFullYear();
+                    
+                    const horas = String(fechaVenceObj.getHours()).padStart(2, '0');
+                    const minutos = String(fechaVenceObj.getMinutes()).padStart(2, '0');
+                    const segundos = String(fechaVenceObj.getSeconds()).padStart(2, '0');
+                    
+                    fechaVenceFormateada = `${dia}/${mes}/${anio} ${horas}:${minutos}:${segundos}`;
+                }
+            }
+
+            const usuarioEncontrado = {
+                estado: estadoFila,
+                fec_vence: fechaVenceFormateada,
+                fec_vence_obj: fechaVenceObj // Enviamos el objeto Date real para cálculos matemáticos en handleAccess
+            };
+
+            handleAccess("registered", usuarioEncontrado);
+
+        } catch (error) {
+            console.error("DEBUG: Error crítico en fetch de DB:", error.message);
+            handleAccess("not_registered");
+        }
+    }
 </script>
 
 </body>
