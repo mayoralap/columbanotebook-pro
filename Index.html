@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Columba Notebook – Planes de Suscripción</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --color-primary: #1a73e8;
+      --color-primary-hover: #1557b0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container-principal {
+      width: 100%;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .main-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #dadce0;
+      padding: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 1000px;
+      margin: 40px auto;
+      box-sizing: border-box;
+    }
+
+    /* ===========================
+       HEADER
+       =========================== */
+    .header-flexible {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 24px;
+      border-bottom: 1px solid #dadce0;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .logo-card {
+      width: 130px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .header-logo {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .header-text-centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      max-width: 500px;
+    }
+
+    .titulo-pagina {
+      font-size: 1.8rem;
+      color: #202124;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+    }
+
+    .text-muted {
+      color: #5f6368;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .header-right-action {
+      margin-left: auto;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ===========================
+       GRID DE PLANES
+       =========================== */
+    .pricing-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 750px) {
+      .header-flexible {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+      }
+
+      .header-text-centered {
+        text-align: center;
+        max-width: 100%;
+      }
+
+      .header-right-action {
+        margin-left: 0;
+        margin-top: 8px;
+      }
+
+      .logo-card {
+        width: 110px;
+      }
+
+      .titulo-pagina {
+        font-size: 1.5rem;
+      }
+
+      .pricing-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 20px;
+      }
+
+      .plan-card {
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+
+      .main-card {
+        padding: 20px;
+      }
+    }
+
+    /* ===========================
+       TARJETAS
+       =========================== */
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #dadce0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .card.featured {
+      border: 2px solid var(--color-primary);
+      position: relative;
+    }
+
+    .card.featured::before {
+      content: "RECOMENDADO";
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--color-primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 10px;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #202124;
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: #5f6368;
+      margin-bottom: 16px;
+    }
+
+    .card-body {
+      font-size: 0.95rem;
+      color: #3c4043;
+      margin-bottom: 24px;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .card-footer {
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .blocked {
+      opacity: 0.35;
+      pointer-events: none;
+      filter: grayscale(100%);
+    }
+
+    /* Contenedores Dinámicos */
+    .action-box {
+      background: #ffffff;
+      padding: 40px 24px;
+      border-radius: 12px;
+      border: 1px solid #dadce0;
+      margin: 20px auto 40px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: none;
+      max-width: 480px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .action-box h2 {
+      font-size: 1.6rem;
+      margin-top: 0;
+      color: #202124;
+    }
+
+    .action-box p {
+      color: #5f6368;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .btn-columba {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--color-primary);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-columba:hover {
+      background-color: var(--color-primary-hover);
+    }
+
+    .info-suscripcion-box {
+      margin: 0 auto 24px auto;
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+      max-width: 1000px;
+      box-sizing: border-box;
+    }
+
+    /* BOTÓN PREMIUM */
+    .btn-premium {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: linear-gradient(135deg, #ffcc00, #ff9900);
+      color: #222;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(255, 200, 0, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-premium:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(255, 200, 0, 0.9);
+    }
+
+    .btn-premium::before,
+    .btn-premium::after {
+      content: "✦";
+      position: absolute;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 12px;
+      animation: sparkle 1.8s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    .btn-premium::before {
+      top: 6px;
+      left: 10px;
+      animation-delay: 0s;
+    }
+
+    .btn-premium::after {
+      bottom: 6px;
+      right: 12px;
+      animation-delay: 0.9s;
+    }
+
+    @keyframes sparkle {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(20deg);
+      }
+    }
+
+    /* Contenedor específico para Google Sign In */
+    .google-auth-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main-card">
+    <div class="header-flexible hidden" id="plansHeader">
+      <div class="logo-card">
+        <img src="https://drive.google.com/thumbnail?id=1GQvjfz-HN7byoeHQqhPsrc9EngvRiaXV" alt="Logo Columba Notebook" class="header-logo">
+      </div>
+
+      <div class="header-text-centered">
+        <h1 class="titulo-pagina">Elige tu plan en Columba Notebook</h1>
+        <p class="text-muted">Selecciona el nivel de acceso que mejor se adapte a tus necesidades.</p>
+      </div>
+
+      <div class="header-right-action" id="premiumButtonWrapper" data-bs-toggle="tooltip" data-bs-placement="bottom"
+        title="Incluye 5% de descuento, informes anuales, todas las funciones avanzadas del plan Pro+, soporte técnico premium y futuras mejoras.">
+        <a href="https://buy.stripe.com/00w8wO3N1gfc5nab3F6Ri04" target="_blank" class="btn-premium"
+          id="btnPremiumAnual">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+            </polygon>
+          </svg>
+          Plan Anual Premium
+        </a>
+      </div>
+    </div>
+
+    <div id="googleAuthBox" class="google-auth-container">
+      <img src="https://drive.google.com/thumbnail?id=1GQvjfz-HN7byoeHQqhPsrc9EngvRiaXV" alt="Logo Columba" style="width:100px; margin-bottom:20px;">
+      <h2 style="font-size:1.5rem; color:#202124; margin:0 0 10px 0;">Verificación de Identidad</h2>
+      <p style="color:#5f6368; max-width:360px; margin:0 0 24px 0; font-size:0.95rem; line-height:1.4;">
+        Para mostrarte las opciones de suscripción vinculadas a tu cuenta, por favor identifícate con Google.
+      </p>
+      <div id="buttonDiv"></div>
+    </div>
+
+    <div id="registrationActionBox" class="action-box"></div>
+
+    <div id="infoSuscripcion" class="info-suscripcion-box"></div>
+
+    <div class="pricing-container hidden" id="plansContainer">
+
+      <div class="card plan-card">
+        <div class="card-title">Básica
+          <i class="bi bi-info-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Incluye registros básicos de ejemplares, control inicial del palomar y exportación en PDF."></i>
+        </div>
+        <div class="card-subtitle">Funciones esenciales.</div>
+        <div class="card-body">
+          Organización básica de ejemplares, registros fundamentales y exportación inicial en PDF. Ideal para comenzar
+          el control general del palomar.
+        </div>
+        <div class="card-footer">
+          <stripe-buy-button buy-button-id="buy_btn_1TiMvDAMpjQA7o9hq0kBlyXu"
+            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
+          </stripe-buy-button>
+        </div>
+      </div>
+
+      <div class="card plan-card">
+        <div class="card-title">Core
+          <i class="bi bi-info-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Agrega cálculo automático de edades, informes ampliados y control individual del ejemplar."></i>
+        </div>
+        <div class="card-subtitle">Gestión individual.</div>
+        <div class="card-body">
+          Control completo de ejemplares, seguimiento reproductivo, <strong>cálculo automático de edades</strong>,
+          informes ampliados y exportación en PDF detallada.
+        </div>
+        <div class="card-footer">
+          <stripe-buy-button buy-button-id="buy_btn_1TiP1MAMpjQA7o9hXjPwBKMN"
+            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
+          </stripe-buy-button>
+        </div>
+      </div>
+
+      <div class="card plan-card">
+        <div class="card-title">Plus
+          <i class="bi bi-info-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Incluye capturas por ejemplar y por palomero, informes más profundos y cruces inteligentes genéticos."></i>
+        </div>
+        <div class="card-subtitle">Análisis avanzado.</div>
+        <div class="card-body">
+          Informes profundos de reproducción, <strong>capturas por ejemplar y por palomero</strong>,
+          <strong>cruces inteligentes basados en coincidencias genéticas</strong> y exportación profesional.
+        </div>
+        <div class="card-footer">
+          <stripe-buy-button buy-button-id="buy_btn_1TiP3LAMpjQA7o9hyonnFgTt"
+            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
+          </stripe-buy-button>
+        </div>
+      </div>
+
+      <div class="card featured plan-card">
+        <div class="card-title">Pro+
+          <i class="bi bi-info-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Incluye Pedigrí inteligente, informes anuales completos, almacenamiento ampliado y herramientas estratégicas."></i>
+        </div>
+        <div class="card-subtitle">Rendimiento máximo.</div>
+        <div class="card-body">
+          Automatización avanzada, almacenamiento ampliado y herramientas premium como
+          <strong>Pedigrí inteligente</strong>, <strong>informes anuales completos</strong> y control total genealógico.
+        </div>
+        <div class="card-footer">
+          <stripe-buy-button buy-button-id="buy_btn_1TiP5TAMpjQA7o9hIIqHE48m"
+            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
+          </stripe-buy-button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<script>
+function getEndpoint(){return"https://docs.google.com/spreadsheets/d/1Vf6YTKbGRR2LsEJ2JKJdrCQLY9o57z5Vh9O7IvJ21qE/gviz/tq?tqx=out:csv&sheet=Auth"}
+function abrirVentanaRegistro(){window.open("https://forms.gle/FnmNY8HFqmhM2JyV8","registroPopup","width=auto,height=auto,resizable=yes,scrollbars=yes")}
+window.onload=function(){google.accounts.id.initialize({client_id:"839165918275-r1s1cvia9uhp843u6hcic91sntasd1q6.apps.googleusercontent.com",callback:manejarRespuestaGoogle,context:"signin",ux_mode:"popup",auto_select:!0});google.accounts.id.renderButton(document.getElementById("buttonDiv"),{theme:"outline",size:"large",text:"signin_with",shape:"rectangular"});google.accounts.id.prompt()};
+function manejarRespuestaGoogle(_r){try{const _b1=_r.credential.split('.')[1];const _b2=_b1.replace(/-/g,'+').replace(/_/g,'/');const _jp=decodeURIComponent(atob(_b2).split('').map(function(_c){return'%'+('00'+_c.charCodeAt(0).toString(16)).slice(-2)}).join(''));const _ou=JSON.parse(_jp);const _ev=_ou.email;document.getElementById("googleAuthBox").classList.add("hidden");ejecutarVerificacionDeAcceso(_ev)}catch(_e){handleAccess("not_registered")}}
+function handleAccess(_s,_u=null){const _c=document.querySelectorAll(".plan-card");const _a=document.getElementById("registrationActionBox");const _h=document.getElementById("plansHeader");const _cn=document.getElementById("plansContainer");const _i=document.getElementById("infoSuscripcion");const _bp=document.getElementById("btnPremiumAnual");_h.classList.remove("hidden");_cn.classList.remove("hidden");_a.style.display="none";_i.style.display="none";if(_s==="admin"){_c.forEach(_x=>{_x.classList.remove("blocked");_x.style.pointerEvents="auto"});if(_bp){_bp.style.pointerEvents="auto";_bp.style.opacity="1";_bp.style.filter="none"}_i.innerHTML='<p style="margin:0; font-size:0.95rem; line-height:1.5;"><strong>Modo Administrador:</strong> Acceso total de desarrollo concedido.</p>';_i.style.background="#e8f0fe";_i.style.color="#1a73e8";_i.style.border="1px solid #c2e7ff";_i.style.display="block";return}if(_s==="not_registered"){_c.forEach(_x=>_x.classList.add("blocked"));_h.classList.add("hidden");_cn.classList.add("hidden");_i.style.display="none";_a.innerHTML='<h2>Acceso restringido</h2><p>Tu correo electrónico no se encuentra registrado en nuestro sistema.<br>Por favor, realiza tu registro inicial para continuar.</p><button class="btn-columba" onclick="abrirVentanaRegistro()">Gestionar Acceso</button>';_a.style.display="block";return}if(_s==="registered"&&_u){const _e=_u.estado?_u.estado.trim().toLowerCase():"";const _f=_u.fec_vence||"";let _pc=!1;let _mi="";if(_e!=="active"){_pc=!0;_mi=`<strong>Estado de Cuenta:</strong> Inactivo / Vencido (Vencimiento anterior: ${_f||'Ninguno'}). Elige un plan a continuación para renovar tu suscripción.`;_i.style.background="#fff3cd";_i.style.color="#856404";_i.style.border="1px solid #ffeeba"}else{let _dr=999;if(_u.fec_vence_obj&&!isNaN(_u.fec_vence_obj.getTime())){const _hoy=new Date();const _fv=new Date(_u.fec_vence_obj);_hoy.setHours(0,0,0,0);_fv.setHours(0,0,0,0);const _dt=_fv-_hoy;_dr=Math.ceil(_dt/(1000*60*60*24))}if(_dr<=3){_pc=!0;_mi=`<strong>Suscripción Activa:</strong> Tu cuenta vence pronto el ${_f} (Te quedan ${_dr} días). Tienes permitido realizar tu renovación anticipada seleccionando un plan.`;_i.style.background="#e8f0fe";_i.style.color="#1a73e8";_i.style.border="1px solid #c2e7ff"}else{_pc=!1;_mi=`<strong>Suscripción Activa:</strong> Tu cuenta se encuentra vigente hasta el ${_f}. No necesitas adquirir otro plan por ahora. Los botones de compra se habilitarán automáticamente cuando falten 3 días o menos para tu vencimiento.`;_i.style.background="#d4edda";_i.style.color="#155724";_i.style.border="1px solid #c3e6cb"}}_i.innerHTML=`<p style="margin:0; font-size:0.95rem; line-height:1.5;">${_mi}</p>`;_i.style.display="block";if(_pc){_c.forEach(_x=>{_x.classList.remove("blocked");_x.style.pointerEvents="auto"});if(_bp){_bp.style.pointerEvents="auto";_bp.style.opacity="1";_bp.style.filter="none"}}else{_c.forEach(_x=>{_x.classList.add("blocked");_x.style.pointerEvents="none"});if(_bp){_bp.style.pointerEvents="none";_bp.style.opacity="0.4";_bp.style.filter="grayscale(100%)"}}}}
+async function ejecutarVerificacionDeAcceso(_em){const _uf=`https://firestore.googleapis.com/v1/projects/columbanotebook/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(_em.trim().toLowerCase())}`;try{const _r=await fetch(_uf);if(_r.status===404){handleAccess("not_registered");return}if(!_r.ok)throw new Error("E");const _d=await _r.json();const _f=_d.fields;if(!_f){handleAccess("not_registered");return}const _ef=_f.estado&&_f.estado.stringValue?_f.estado.stringValue.trim().toLowerCase():"";let _fvf="";let _fvo=null;if(_f.fec_vence&&_f.fec_vence.timestampValue){_fvo=new Date(_f.fec_vence.timestampValue);if(!isNaN(_fvo.getTime())){const _d=String(_fvo.getDate()).padStart(2,'0');const _m=String(_fvo.getMonth()+1).padStart(2,'0');const _a=_fvo.getFullYear();const _h=String(_fvo.getHours()).padStart(2,'0');const _min=String(_fvo.getMinutes()).padStart(2,'0');const _s=String(_fvo.getSeconds()).padStart(2,'0');_fvf=`${_d}/${_m}/${_a} ${_h}:${_min}:${_s}`}}const _ue={estado:_ef,fec_vence:_fvf,fec_vence_obj:_fvo};handleAccess("registered",_ue)}catch(_er){handleAccess("not_registered")}}
+</script>
+
+</body>
+
+</html>
