@@ -297,7 +297,8 @@
       </div>
       <div class="header-text-centered">
         <h1 class="titulo-pagina">Elige tu plan en Columba Notebook Pro</h1>
-        <p class="text-muted">Selecciona el nivel de acceso que mejor se adapte a tus necesidades. Ambas opciones incluyen el conjunto completo de herramientas Pro.</p>
+        <p class="text-muted">Selecciona el nivel de acceso que mejor se adapte a tus necesidades. Ambas opciones
+          incluyen el conjunto completo de herramientas Pro.</p>
       </div>
     </div>
 
@@ -312,7 +313,7 @@
     </div>
 
     <div class="pricing-container hidden" id="plansContainer">
-      
+
       <!-- TARJETA: PLAN MENSUAL -->
       <div class="card plan-card">
         <div class="card-title">Plan Mensual Pro</div>
@@ -320,7 +321,8 @@
         <div class="card-body">
           <ul>
             <li><strong>Módulo Ejemplares:</strong> Control de existencias, informes generales e individuales.</li>
-            <li><strong>Módulo Conquistas:</strong> Registro detallado con imágenes, estadísticas por año y capturas.</li>
+            <li><strong>Módulo Conquistas:</strong> Registro detallado con imágenes, estadísticas por año y capturas.
+            </li>
             <li><strong>Soporte Técnico:</strong> Atención estándar vía correo electrónico.</li>
           </ul>
         </div>
@@ -338,7 +340,8 @@
         <div class="card-body">
           <ul>
             <li><strong>Módulo Ejemplares:</strong> Control de existencias, informes generales e individuales.</li>
-            <li><strong>Módulo Conquistas:</strong> Registro detallado con imágenes, estadísticas por año y capturas.</li>
+            <li><strong>Módulo Conquistas:</strong> Registro detallado con imágenes, estadísticas por año y capturas.
+            </li>
             <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria con el desarrollador.</li>
           </ul>
         </div>
@@ -404,8 +407,20 @@
     }
 
     function abrirVentanaRegistro() {
-      window.open('https://forms.gle/gFChbGjRsHNwgFQX7', 'registroPopup', 'width=auto,height=auto,resizable=yes,scrollbars=yes');
+      const width=800;
+      const height=900;
+      const left=(screen.width/2)-(width/2);
+      const top=(screen.height/2)-(height/2);
+      window.open(
+        "https://forms.gle/LwN3jgyWKEYdS9Bb7",
+        "popupRegistro",
+        `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=no`
+      );
     }
+
+    function abrirPopup(){
+  
+}
 
     function cambiarCuentaGoogle(event) {
       if (event) event.preventDefault();
@@ -560,7 +575,7 @@
           <h2>Correo No Registrado</h2>
           <p>El correo <strong>${emailUser || 'seleccionado'}</strong> no se encuentra activo en nuestro sistema.<br><br>Si acabas de completar tu registro, la activación puede tardar unas horas. De lo contrario, solicita tu acceso a continuación.</p>
           <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-            <button class="btn-columba" onclick="abrirVentanaRegistro()">Ir al Formulario de Registro</button>
+            <button class="btn-columba" onclick="abrirVentanaRegistro()">Registro de Acceso</button>
             <a href="#" onclick="cambiarCuentaGoogle(event)" style="color:#5f6368; font-size:0.85rem; text-decoration:underline; margin-top:8px;">Probar con otra cuenta de Google</a>
           </div>
         `;
@@ -631,4 +646,5 @@
     }
   </script>
 </body>
+
 </html>
