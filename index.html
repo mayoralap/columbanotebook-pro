@@ -32,9 +32,13 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       width: 100%;
       max-width: 1000px;
-      margin: 40px auto;
+      margin: 0 auto !important;
+      /* ← CORRECTO */
       box-sizing: border-box;
+      transform: scale(0.80);
+      transform-origin: top center;
     }
+
 
     .header-flexible {
       display: flex;
@@ -321,19 +325,21 @@
         <div class="card-body">
           <ul>
             <ul>
-            <ul>
-              <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales, individuales y por año.</li>
-              <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y por crías.</li>
-              <li><strong>Módulo Crías:</strong> Pedigrí, Cruces(Coincidencias Genéticas) y detección de parentescos.</li>
-              <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
-              <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
-            </li>
-            <li><strong>Soporte Técnico:</strong> Atención estándar vía correo electrónico.</li>
-          </ul>
+              <ul>
+                <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales,
+                  individuales y por año.</li>
+                <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y
+                  por crías.</li>
+                <li><strong>Módulo Crías:</strong> Pedigrí, Cruces(Coincidencias Genéticas) y detección de parentescos.
+                </li>
+                <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
+                <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
+                </li>
+                <li><strong>Soporte Técnico:</strong> Atención estándar vía correo electrónico.</li>
+              </ul>
         </div>
         <div class="card-footer">
-          <stripe-buy-button
-            buy-button-id="buy_btn_1UKpZaAMpjQA7o9hmGpF6fJw"
+          <stripe-buy-button buy-button-id="buy_btn_1UKpZaAMpjQA7o9hmGpF6fJw"
             publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
           </stripe-buy-button>
         </div>
@@ -346,20 +352,23 @@
         <div class="card-body">
           <ul>
             <ul>
-            <ul>
-              <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales, individuales y por año.</li>
-              <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y por crías.</li>
-              <li><strong>Módulo Crías:</strong> Pedigrí, Cruces(Coincidencias Genéticas) y detección de parentescos.</li>
-              <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
-              <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
-              </li>
-              <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria con el desarrollador.</li>
-              <li><strong>Beneficios Exclusivos:</strong> Actualizaciones prioritarias y optimización anual de tu base de datos NBK.</li>
-            </ul>
+              <ul>
+                <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales,
+                  individuales y por año.</li>
+                <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y
+                  por crías.</li>
+                <li><strong>Módulo Crías:</strong> Pedigrí, Cruces(Coincidencias Genéticas) y detección de parentescos.
+                </li>
+                <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
+                <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
+                </li>
+                <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria con el desarrollador.</li>
+                <li><strong>Beneficios Exclusivos:</strong> Actualizaciones prioritarias y optimización anual de tu base
+                  de datos NBK.</li>
+              </ul>
         </div>
         <div class="card-footer">
-          <stripe-buy-button
-            buy-button-id="buy_btn_1UKpPkAMpjQA7o9hZemGsc6W"
+          <stripe-buy-button buy-button-id="buy_btn_1UKpPkAMpjQA7o9hZemGsc6W"
             publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
           </stripe-buy-button>
         </div>
