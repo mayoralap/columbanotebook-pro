@@ -7,7 +7,7 @@
   <title>Columba Notebook – Planes de Suscripción</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
-     :root {
+    :root {
       --color-primary: #1a73e8;
       --color-primary-hover: #1557b0;
       --color-success: #28a745;
@@ -18,9 +18,10 @@
       background: #f5f7fb;
       margin: 0;
       padding: 0;
-      display: block; /* ← FLEX ESTABA ROMPIENDO TODO */
+      display: block; /* ← ESTO LIBERA TODO */
       min-height: 100vh;
     }
+
     .main-card {
       background: #ffffff;
       border-radius: 12px;
@@ -28,12 +29,16 @@
       padding: 32px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       width: 100%;
-      max-width: none; /* ← AHORA SÍ SE EXPANDE */
+      max-width: none;
+      /* ← AHORA SÍ SE EXPANDE */
       margin: 0 auto !important;
+      /* ← CORRECTO */
       box-sizing: border-box;
-      /* transform: scale(0.90);  <-- si lo quieres usar, comenta así */
+      //transform: scale(0.90);
+      transform-origin: top center;
     }
-    
+
+
     .header-flexible {
       display: flex;
       align-items: center;
