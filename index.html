@@ -2,670 +2,650 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Columba Notebook – Planes de Suscripción</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <style>
-    :root {
-      --color-primary: #1a73e8;
-      --color-primary-hover: #1557b0;
-      --color-success: #28a745;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Columba Notebook – Planes de Suscripción</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --color-primary: #1a73e8;
+      --color-primary-hover: #1557b0;
+      --color-success: #28a745;
+    }
 
-    body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #f5f7fb;
-      margin: 0;
-      padding: 0;
-      display: block; /* ← ESTO LIBERA TODO */
-      min-height: 100vh;
-    }
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+      display: block;
+      min-height: 100vh;
+    }
 
-    .main-card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid #dadce0;
-      padding: 32px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      width: 100%;
-      max-width: none;
-      /* ← AHORA SÍ SE EXPANDE */
-      margin: 0 auto !important;
-      /* ← CORRECTO */
-      box-sizing: border-box;
-      //transform: scale(0.90);
-      transform-origin: top center;
-    }
+    .main-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #dadce0;
+      padding: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: none;
+      margin: 0 auto !important;
+      box-sizing: border-box;
+      transform-origin: top center;
+    }
 
+    .header-flexible {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 24px;
+      border-bottom: 1px solid #dadce0;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
 
-    .header-flexible {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 24px;
-      border-bottom: 1px solid #dadce0;
-      padding-bottom: 24px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-    }
+    .logo-card {
+      width: 130px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-    .logo-card {
-      width: 130px;
-      flex-shrink: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    .header-logo {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
 
-    .header-logo {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
+    .header-text-centered {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      max-width: 650px;
+    }
 
-    .header-text-centered {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      max-width: 650px;
-    }
+    .titulo-pagina {
+      font-size: 1.8rem;
+      color: #202124;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+    }
 
-    .titulo-pagina {
-      font-size: 1.8rem;
-      color: #202124;
-      margin: 0 0 8px 0;
-      font-weight: 600;
-    }
+    .text-muted {
+      color: #5f6368;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
 
-    .text-muted {
-      color: #5f6368;
-      margin: 0;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
+    .hidden {
+      display: none !important;
+    }
 
-    /* REGLA MAESTRA DE OCULTAMIENTO ABSOLUTO */
-    .hidden {
-      display: none !important;
-    }
+    .pricing-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      box-sizing: border-box;
+    }
 
-    .pricing-container {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      box-sizing: border-box;
-    }
+    @media (max-width: 750px) {
+      .header-flexible {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+      }
 
-    @media (max-width: 750px) {
-      .header-flexible {
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-      }
+      .header-text-centered {
+        text-align: center;
+        max-width: 100%;
+      }
 
-      .header-text-centered {
-        text-align: center;
-        max-width: 100%;
-      }
+      .logo-card {
+        width: 110px;
+      }
 
-      .logo-card {
-        width: 110px;
-      }
+      .titulo-pagina {
+        font-size: 1.5rem;
+      }
 
-      .titulo-pagina {
-        font-size: 1.5rem;
-      }
+      .pricing-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 20px;
+      }
 
-      .pricing-container {
-        grid-template-columns: 1fr;
-        width: 100%;
-        gap: 20px;
-      }
+      .main-card {
+        padding: 20px;
+      }
+    }
 
-      .main-card {
-        padding: 20px;
-      }
-    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #dadce0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      word-wrap: break-word;
+    }
 
-    .card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid #dadce0;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      word-wrap: break-word;
-    }
+    .card.featured {
+      border: 2px solid var(--color-success);
+      position: relative;
+      box-shadow: 0 4px 14px rgba(40, 167, 69, 0.15);
+    }
 
-    .card.featured {
-      border: 2px solid var(--color-success);
-      position: relative;
-      box-shadow: 0 4px 14px rgba(40, 167, 69, 0.15);
-    }
+    .card.featured::before {
+      content: "RECOMENDADO";
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--color-success);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 10px;
+    }
 
-    .card.featured::before {
-      content: "RECOMENDADO";
-      position: absolute;
-      top: -12px;
-      right: 20px;
-      background: var(--color-success);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 2px 10px;
-      border-radius: 10px;
-    }
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #202124;
+    }
 
-    .card-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: #202124;
-    }
+    .card-subtitle {
+      font-size: 0.88rem;
+      color: #5f6368;
+      margin-bottom: 16px;
+    }
 
-    .card-subtitle {
-      font-size: 0.88rem;
-      color: #5f6368;
-      margin-bottom: 16px;
-    }
+    .card-body {
+      font-size: 0.9rem;
+      color: #3c4043;
+      margin-bottom: 24px;
+      flex-grow: 1;
+      line-height: 1.5;
+    }
 
-    .card-body {
-      font-size: 0.9rem;
-      color: #3c4043;
-      margin-bottom: 24px;
-      flex-grow: 1;
-      line-height: 1.5;
-    }
+    .card-body ul {
+      margin: 0;
+      padding-left: 18px;
+    }
 
-    .card-body ul {
-      margin: 0;
-      padding-left: 18px;
-    }
+    .card-body li {
+      margin-bottom: 8px;
+    }
 
-    .card-body li {
-      margin-bottom: 8px;
-    }
+    .card-footer {
+      text-align: center;
+      margin-top: auto;
+    }
 
-    .card-footer {
-      text-align: center;
-      margin-top: auto;
-    }
+    .blocked {
+      opacity: 0.35;
+      pointer-events: none;
+      filter: grayscale(100%);
+    }
 
-    .blocked {
-      opacity: 0.35;
-      pointer-events: none;
-      filter: grayscale(100%);
-    }
+    .action-box {
+      background: #ffffff;
+      padding: 40px 24px;
+      border-radius: 12px;
+      border: 1px solid #dadce0;
+      margin: 20px auto 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: none;
+      max-width: 480px;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-    .action-box {
-      background: #ffffff;
-      padding: 40px 24px;
-      border-radius: 12px;
-      border: 1px solid #dadce0;
-      margin: 20px auto 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      display: none;
-      max-width: 480px;
-      width: 100%;
-      box-sizing: border-box;
-    }
+    .action-box h2 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      color: #202124;
+    }
 
-    .action-box h2 {
-      font-size: 1.5rem;
-      margin-top: 0;
-      color: #202124;
-    }
+    .action-box p {
+      color: #5f6368;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
 
-    .action-box p {
-      color: #5f6368;
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
+    .btn-columba {
+      display: inline-block;
+      text-decoration: none;
+      background-color: var(--color-primary);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+    }
 
-    .btn-columba {
-      display: inline-block;
-      text-decoration: none;
-      background-color: var(--color-primary);
-      color: white;
-      padding: 12px 32px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-    }
+    .info-suscripcion-box {
+      margin: 0 auto 24px auto;
+      padding: 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+      max-width: 1000px;
+      box-sizing: border-box;
+    }
 
-    .info-suscripcion-box {
-      margin: 0 auto 24px auto;
-      padding: 16px;
-      border-radius: 8px;
-      font-weight: 500;
-      text-align: center;
-      display: none;
-      max-width: 1000px;
-      box-sizing: border-box;
-    }
+    .alert-banner {
+      background-color: #e8f4f8;
+      border: 1px solid #b8daff;
+      color: #004085;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+    }
 
-    .alert-banner {
-      background-color: #e8f4f8;
-      border: 1px solid #b8daff;
-      color: #004085;
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      text-align: center;
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .google-auth-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      text-align: center;
-    }
-  </style>
+    .google-auth-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
 
-  <div class="main-card">
+  <div class="main-card">
 
-    <!-- BLOQUE 1: VERIFICACIÓN GOOGLE (VISIBLE AL INICIO) -->
-    <div id="googleAuthBox" class="google-auth-container">
-      <img src="https://drive.google.com/thumbnail?id=15hTMpm_5aNuU2QKTWZGdK2XKdtpEog4w" alt="Logo Columba" style="width:100px; margin-bottom:20px;">
-      <h2 style="font-size:1.5rem; color:#202124; margin:0 0 10px 0;">Verificación de Identidad</h2>
-      <p style="color:#5f6368; max-width:380px; margin:0 0 24px 0; font-size:0.95rem; line-height:1.4;">
-        Para verificar el estado de tu cuenta y mostrarte las opciones correspondientes, inicia sesión con Google.
-      </p>
-      <div id="buttonDiv"></div>
-    </div>
+    <!-- BLOQUE 1: VERIFICACIÓN GOOGLE -->
+    <div id="googleAuthBox" class="google-auth-container">
+      <img src="https://drive.google.com/thumbnail?id=15hTMpm_5aNuU2QKTWZGdK2XKdtpEog4w" alt="Logo Columba" style="width:100px; margin-bottom:20px;">
+      <h2 style="font-size:1.5rem; color:#202124; margin:0 0 10px 0;">Verificación de Identidad</h2>
+      <p style="color:#5f6368; max-width:380px; margin:0 0 24px 0; font-size:0.95rem; line-height:1.4;">
+        Para verificar el estado de tu cuenta y mostrarte las opciones correspondientes, inicia sesión con Google.
+      </p>
+      <div id="buttonDiv"></div>
+    </div>
 
-    <!-- BLOQUE 2: MENSAJE PARA USUARIO NO REGISTRADO (OCULTO POR DEFECTO) -->
-    <div id="registrationActionBox" class="action-box"></div>
+    <!-- BLOQUE 2: MENSAJE PARA USUARIO NO REGISTRADO -->
+    <div id="registrationActionBox" class="action-box"></div>
 
-    <!-- BLOQUE 3: ENCABEZADO Y PLANES (ESTRICTAMENTE OCULTOS CON CLASS HIDDEN) -->
-    <div class="header-flexible hidden" id="plansHeader">
-      <div class="logo-card">
-        <img src="https://drive.google.com/thumbnail?id=15hTMpm_5aNuU2QKTWZGdK2XKdtpEog4w" alt="Logo Columba Notebook Pro" class="header-logo">
-      </div>
-      <div class="header-text-centered">
-        <h1 class="titulo-pagina">Elige tu plan en Columba Notebook Pro</h1>
-        <p class="text-muted">Selecciona el nivel de acceso que mejor se adapte a tus necesidades. Ambas opciones
-          incluyen el conjunto completo de herramientas Pro.</p>
-      </div>
-    </div>
+    <!-- BLOQUE 3: ENCABEZADO Y PLANES -->
+    <div class="header-flexible hidden" id="plansHeader">
+      <div class="logo-card">
+        <img src="https://drive.google.com/thumbnail?id=15hTMpm_5aNuU2QKTWZGdK2XKdtpEog4w" alt="Logo Columba Notebook Pro" class="header-logo">
+      </div>
+      <div class="header-text-centered">
+        <h1 class="titulo-pagina">Elige tu plan en Columba Notebook Pro</h1>
+        <p class="text-muted">Selecciona el nivel de acceso que mejor se adapte a tus necesidades. Ambas opciones incluyen el conjunto completo de herramientas Pro.</p>
+      </div>
+    </div>
 
-    <div id="infoSuscripcion" class="info-suscripcion-box"></div>
+    <div id="infoSuscripcion" class="info-suscripcion-box"></div>
 
-    <!-- BANNER PREVENTIVO POST-PAGO (Se muestra junto con las tarjetas cuando están habilitadas) -->
-    <div id="paymentAlertBanner" class="alert-banner hidden">
-      <strong>⚠️ ¿Realizaste tu pago recientemente?</strong><br>
-      La confirmación por parte de Stripe y la sincronización pueden tardar hasta <strong>72 horas</strong>.<br>
-      <strong>Por favor, evita realizar pagos duplicados o reintentar la compra.</strong><br>
-      Si transcurrido ese tiempo tu acceso no se actualiza, contacta al administrador.
-    </div>
+    <!-- BANNER PREVENTIVO POST-PAGO -->
+    <div id="paymentAlertBanner" class="alert-banner hidden">
+      <strong>⚠️ ¿Realizaste tu pago recientemente?</strong><br>
+      La confirmación por parte de Stripe y la sincronización pueden tardar hasta <strong>72 horas</strong>.<br>
+      <strong>Por favor, evita realizar pagos duplicados o reintentar la compra.</strong><br>
+      Si transcurrido ese tiempo tu acceso no se actualiza, contacta al administrador.
+    </div>
 
-    <div class="pricing-container hidden" id="plansContainer">
+    <div class="pricing-container hidden" id="plansContainer">
 
-      <!-- TARJETA: PLAN MENSUAL -->
-      <div class="card plan-card">
-        <div class="card-title">Plan Mensual Pro</div>
-        <div class="card-subtitle">Pago recurrente mes a mes.</div>
-        <div class="card-body">
-          <ul>
-            <ul>
-              <ul>
-                <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales,
-                  individuales y por año.</li>
-                <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y
-                  por crías.</li>
-                <li><strong>Módulo Crías:</strong> Pedigrí, Cruces(Coincidencias Genéticas) y detección de parentescos.
-                </li>
-                <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
-                <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
-                </li>
-                <li><strong>Soporte Técnico:</strong> Atención estándar vía correo electrónico.</li>
-              </ul>
-        </div>
-        <div class="card-footer">
-          <stripe-buy-button buy-button-id="buy_btn_1UKpZaAMpjQA7o9hmGpF6fJw"
-            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
-          </stripe-buy-button>
-        </div>
-      </div>
+      <!-- TARJETA: PLAN MENSUAL -->
+      <div class="card plan-card">
+        <div class="card-title">Plan Mensual Pro</div>
+        <div class="card-subtitle">Pago recurrente mes a mes.</div>
+        <div class="card-body">
+          <ul>
+            <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales, individuales y por año.</li>
+            <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y por crías.</li>
+            <li><strong>Módulo Crías:</strong> Pedigrí, Cruces (Coincidencias Genéticas) y detección de parentescos.</li>
+            <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
+            <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
+            <li><strong>Soporte Técnico:</strong> Atención estándar vía correo electrónico.</li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <stripe-buy-button buy-button-id="buy_btn_1UKpZaAMpjQA7o9hmGpF6fJw"
+            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
+          </stripe-buy-button>
+        </div>
+      </div>
 
-      <!-- TARJETA: PLAN ANUAL -->
-      <div class="card featured plan-card">
-        <div class="card-title">Plan Anual Pro</div>
-        <div class="card-subtitle">Un solo pago al año (12 meses continuos).</div>
-        <div class="card-body">
-          <ul>
-            <ul>
-              <ul>
-                <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales,
-                  individuales y por año.</li>
-                <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y
-                  por crías.</li>
-                <li><strong>Módulo Crías:</strong> Pedigrí, Cruces(Coincidencias Genéticas) y detección de parentescos.
-                </li>
-                <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
-                <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
-                </li>
-                <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria con el desarrollador.</li>
-                <li><strong>Beneficios Exclusivos:</strong> Actualizaciones prioritarias y acceso preferente a mejoras del sistema. 
-                  Funciones personalizadas disponibles con costo adicional.</li>
-              </ul>
-        </div>
-        <div class="card-footer">
-          <stripe-buy-button buy-button-id="buy_btn_1UKpPkAMpjQA7o9hZemGsc6W"
-            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
-          </stripe-buy-button>
-        </div>
-      </div>
+      <!-- TARJETA: PLAN ANUAL -->
+      <div class="card featured plan-card">
+        <div class="card-title">Plan Anual Pro</div>
+        <div class="card-subtitle">Un solo pago al año (12 meses continuos).</div>
+        <div class="card-body">
+          <ul>
+            <li><strong>Módulo Ejemplares:</strong> Fichas avanzadas, control de existencias, informes generales, individuales y por año.</li>
+            <li><strong>Módulo Capturas:</strong> Registro con imagen, estadísticas por año, informes por ejemplar y por crías.</li>
+            <li><strong>Módulo Crías:</strong> Pedigrí, Cruces (Coincidencias Genéticas) y detección de parentescos.</li>
+            <li><strong>Informes de Alto Nivel:</strong> Paneles analíticos y métricas de rendimiento.</li>
+            <li><strong>Exportación Profesional:</strong> Capturas en JPG e informes listos para compartir.</li>
+            <li>⭐ <strong>Soporte Técnico VIP:</strong> Atención directa y prioritaria con el desarrollador.</li>
+            <li><strong>Beneficios Exclusivos:</strong> Actualizaciones prioritarias y acceso preferente a mejoras del sistema. Funciones personalizadas disponibles con costo adicional.</li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <stripe-buy-button buy-button-id="buy_btn_1UKpPkAMpjQA7o9hZemGsc6W"
+            publishable-key="pk_live_51TiKYoAMpjQA7o9hlAxNxm9gZq9MXqQrb0qXfErbk0IypthR1qRCQjWROWd38LkuFPKVTQs3sWjSXiBzmK2HSjBb00IJuS9HqD">
+          </stripe-buy-button>
+        </div>
+      </div>
 
-    </div>
+    </div>
 
-  </div>
+  </div>
 
-  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <script>
-    const DB_NAME = "CN_AccessDB";
-    const DB_VERSION = 2;
-    const STORE_NAME = "clients";
+  <script>
+    const DB_NAME = "CN_AccessDB";
+    const DB_VERSION = 2;
+    const STORE_NAME = "clients";
 
-    function abrirIndexedDB() {
-      return new Promise((resolve, reject) => {
-        const request = indexedDB.open(DB_NAME, DB_VERSION);
-        request.onerror = () => reject(request.error);
-        request.onsuccess = () => resolve(request.result);
-        request.onupgradeneeded = (event) => {
-          const db = event.target.result;
-          if (!db.objectStoreNames.contains(STORE_NAME)) {
-            db.createObjectStore(STORE_NAME, { keyPath: "email" });
-          }
-        };
-      });
-    }
+    function abrirIndexedDB() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains(STORE_NAME)) {
+            db.createObjectStore(STORE_NAME, { keyPath: "email" });
+          }
+        };
+      });
+    }
 
-    async function guardarSesionLocal(data) {
-      try {
-        const db = await abrirIndexedDB();
-        return new Promise((resolve, reject) => {
-          const transaction = db.transaction(STORE_NAME, "readwrite");
-          const store = transaction.objectStore(STORE_NAME);
-          const registro = {
-            email: (data.email || "").trim().toLowerCase(),
-            action: data.action || "",
-            version: data.version || "",
-            tipo: data.tipo || "",
-            customer_id: data.customer_id || "",
-            price_id: data.price_id || "",
-            estado: data.estado || "",
-            fec_vence: data.fec_vence || "",
-            fec_ult_act: data.fec_ult_act || "",
-            actualizado: new Date().toISOString()
-          };
-          const request = store.put(registro);
-          request.onsuccess = () => resolve(true);
-          request.onerror = () => reject(request.error);
-        });
-      } catch (error) {
-        console.error("Error IndexedDB:", error);
-      }
-    }
+    async function guardarSesionLocal(data) {
+      try {
+        const db = await abrirIndexedDB();
+        return new Promise((resolve, reject) => {
+          const transaction = db.transaction(STORE_NAME, "readwrite");
+          const store = transaction.objectStore(STORE_NAME);
+          const registro = {
+            email: (data.email || "").trim().toLowerCase(),
+            action: data.action || "",
+            version: data.version || "",
+            tipo: data.tipo || "",
+            customer_id: data.customer_id || "",
+            price_id: data.price_id || "",
+            estado: data.estado || "",
+            fec_vence: data.fec_vence || "",
+            fec_ult_act: data.fec_ult_act || "",
+            actualizado: new Date().toISOString()
+          };
+          const request = store.put(registro);
+          request.onsuccess = () => resolve(true);
+          request.onerror = () => reject(request.error);
+        });
+      } catch (error) {
+        console.error("Error IndexedDB:", error);
+      }
+    }
 
-    function abrirVentanaRegistro() {
-      const width=800;
-      const height=900;
-      const left=(screen.width/2)-(width/2);
-      const top=(screen.height/2)-(height/2);
-      window.open(
-        "https://forms.gle/LwN3jgyWKEYdS9Bb7",
-        "popupRegistro",
-        `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=no`
-      );
-    }
+    function abrirVentanaRegistro() {
+      const width = 800;
+      const height = 900;
+      const left = (screen.width / 2) - (width / 2);
+      const top = (screen.height / 2) - (height / 2);
+      window.open(
+        "https://forms.gle/LwN3jgyWKEYdS9Bb7",
+        "popupRegistro",
+        `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=no`
+      );
+    }
 
-    function abrirPopup(){
-  
-}
+    function abrirPopup() {
+    }
 
-    function cambiarCuentaGoogle(event) {
-      if (event) event.preventDefault();
-      google.accounts.id.disableAutoSelect();
-      location.reload();
-    }
+    function cambiarCuentaGoogle(event) {
+      if (event) event.preventDefault();
+      google.accounts.id.disableAutoSelect();
+      location.reload();
+    }
 
-    window.onload = function () {
-      google.accounts.id.initialize({
-        client_id: "839165918275-r1s1cvia9uhp843u6hcic91sntasd1q6.apps.googleusercontent.com",
-        callback: manejarRespuestaGoogle,
-        context: "signin",
-        ux_mode: "popup",
-        auto_select: false
-      });
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "839165918275-r1s1cvia9uhp843u6hcic91sntasd1q6.apps.googleusercontent.com",
+        callback: manejarRespuestaGoogle,
+        context: "signin",
+        ux_mode: "popup",
+        auto_select: false
+      });
 
-      google.accounts.id.renderButton(
-        document.getElementById("buttonDiv"),
-        { theme: "outline", size: "large", text: "signin_with", shape: "rectangular" }
-      );
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large", text: "signin_with", shape: "rectangular" }
+      );
 
-      google.accounts.id.prompt();
-    };
+      google.accounts.id.prompt();
+    };
 
-    function manejarRespuestaGoogle(response) {
-      try {
-        const base64Url = response.credential.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
+    function manejarRespuestaGoogle(response) {
+      try {
+        const base64Url = response.credential.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
 
-        const objetoUsuario = JSON.parse(jsonPayload);
-        const emailVerificado = objetoUsuario.email;
+        const objetoUsuario = JSON.parse(jsonPayload);
+        const emailVerificado = objetoUsuario.email;
 
-        document.getElementById("googleAuthBox").classList.add("hidden");
+        document.getElementById("googleAuthBox").classList.add("hidden");
 
-        ejecutarVerificacionDeAcceso(emailVerificado);
-      } catch (error) {
-        handleAccess("not_registered", null, "");
-      }
-    }
+        ejecutarVerificacionDeAcceso(emailVerificado);
+      } catch (error) {
+        handleAccess("not_registered", null, "");
+      }
+    }
 
-    async function ejecutarVerificacionDeAcceso(emailLimpio) {
-      const emailRaw = emailLimpio.trim();
-      const emailNormalizado = emailRaw.toLowerCase();
-      const projectId = "columbanotebook-pro"; 
-      
-      let urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailNormalizado)}`;
+    async function ejecutarVerificacionDeAcceso(emailLimpio) {
+      const emailRaw = emailLimpio.trim();
+      const emailNormalizado = emailRaw.toLowerCase();
+      const projectId = "columbanotebook-pro"; 
+      
+      let urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailNormalizado)}`;
 
-      try {
-        let respuesta = await fetch(urlFirestore);
+      try {
+        let respuesta = await fetch(urlFirestore);
 
-        if (!respuesta.ok && emailRaw !== emailNormalizado) {
-          urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailRaw)}`;
-          respuesta = await fetch(urlFirestore);
-        }
+        if (!respuesta.ok && emailRaw !== emailNormalizado) {
+          urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailRaw)}`;
+          respuesta = await fetch(urlFirestore);
+        }
 
-        if (!respuesta.ok) {
-          handleAccess("not_registered", null, emailRaw);
-          return;
-        }
+        if (!respuesta.ok) {
+          handleAccess("not_registered", null, emailRaw);
+          return;
+        }
 
-        const datosUsuario = await respuesta.json();
-        const campos = datosUsuario.fields;
+        const datosUsuario = await respuesta.json();
+        const campos = datosUsuario.fields;
 
-        if (!campos) {
-          handleAccess("not_registered", null, emailRaw);
-          return;
-        }
+        if (!campos) {
+          handleAccess("not_registered", null, emailRaw);
+          return;
+        }
 
-        const emailVal = campos.email?.stringValue || emailRaw;
-        const actionVal = campos.action?.stringValue || "";
-        const versionVal = campos.version?.stringValue || "";
-        const tipoVal = campos.tipo?.stringValue || "";
-        const customerIdVal = campos.customer_id?.stringValue || "";
-        const priceIdVal = campos.price_id?.stringValue || "";
+        const emailVal = campos.email?.stringValue || emailRaw;
+        const actionVal = campos.action?.stringValue || "";
+        const versionVal = campos.version?.stringValue || "";
+        const tipoVal = campos.tipo?.stringValue || "";
+        const customerIdVal = campos.customer_id?.stringValue || "";
+        const priceIdVal = campos.price_id?.stringValue || "";
 
-        let estadoFila = campos.estado?.stringValue?.trim().toLowerCase() || "";
-        const actionValLower = actionVal.trim().toLowerCase();
-        const estadosActivosPermitidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
+        let estadoFila = campos.estado?.stringValue?.trim().toLowerCase() || "";
+        const actionValLower = actionVal.trim().toLowerCase();
+        const estadosActivosPermitidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
 
-        if (!estadoFila || !estadosActivosPermitidos.includes(estadoFila)) {
-          if (estadosActivosPermitidos.includes(actionValLower)) {
-            estadoFila = "complete"; 
-          }
-        }
+        if (!estadoFila || !estadosActivosPermitidos.includes(estadoFila)) {
+          if (estadosActivosPermitidos.includes(actionValLower)) {
+            estadoFila = "complete"; 
+          }
+        }
 
-        let fechaVenceFormateada = "";
-        let fechaVenceObj = null;
+        let fechaVenceFormateada = "";
+        let fechaVenceObj = null;
 
-        const fecVenceRaw = campos.fec_vence?.timestampValue || campos.fec_vence?.stringValue;
+        const fecVenceRaw = campos.fec_vence?.timestampValue || campos.fec_vence?.stringValue;
 
-        if (fecVenceRaw) {
-          fechaVenceObj = new Date(fecVenceRaw);
-          if (isNaN(fechaVenceObj.getTime())) {
-            fechaVenceObj = null;
-          }
-        }
+        if (fecVenceRaw) {
+          fechaVenceObj = new Date(fecVenceRaw);
+          if (isNaN(fechaVenceObj.getTime())) {
+            fechaVenceObj = null;
+          }
+        }
 
-        if (fechaVenceObj && !isNaN(fechaVenceObj.getTime())) {
-          fechaVenceFormateada = `${String(fechaVenceObj.getDate()).padStart(2, '0')}/${String(fechaVenceObj.getMonth() + 1).padStart(2, '0')}/${fechaVenceObj.getFullYear()}`;
-        } else if (campos.fec_vence?.stringValue) {
-          fechaVenceFormateada = campos.fec_vence.stringValue;
-        }
+        if (fechaVenceObj && !isNaN(fechaVenceObj.getTime())) {
+          fechaVenceFormateada = `${String(fechaVenceObj.getDate()).padStart(2, '0')}/${String(fechaVenceObj.getMonth() + 1).padStart(2, '0')}/${fechaVenceObj.getFullYear()}`;
+        } else if (campos.fec_vence?.stringValue) {
+          fechaVenceFormateada = campos.fec_vence.stringValue;
+        }
 
-        const fecUltActRaw = campos.fec_ult_act?.timestampValue || campos.fec_ult_act?.stringValue || "";
+        const fecUltActRaw = campos.fec_ult_act?.timestampValue || campos.fec_ult_act?.stringValue || "";
 
-        const datosCompletos = {
-          email: emailVal,
-          action: actionVal,
-          version: versionVal,
-          tipo: tipoVal,
-          customer_id: customerIdVal,
-          price_id: priceIdVal,
-          estado: estadoFila,
-          fec_vence: fechaVenceFormateada,
-          fec_ult_act: fecUltActRaw
-        };
+        const datosCompletos = {
+          email: emailVal,
+          action: actionVal,
+          version: versionVal,
+          tipo: tipoVal,
+          customer_id: customerIdVal,
+          price_id: priceIdVal,
+          estado: estadoFila,
+          fec_vence: fechaVenceFormateada,
+          fec_ult_act: fecUltActRaw
+        };
 
-        await guardarSesionLocal(datosCompletos);
-        
-        handleAccess("registered", { 
-          estado: estadoFila, 
-          action: actionVal,
-          version: versionVal,
-          tipo: tipoVal,
-          fec_vence: fechaVenceFormateada, 
-          fec_vence_obj: fechaVenceObj 
-        }, emailNormalizado);
+        await guardarSesionLocal(datosCompletos);
+        
+        handleAccess("registered", { 
+          estado: estadoFila, 
+          action: actionVal,
+          version: versionVal,
+          tipo: tipoVal,
+          fec_vence: fechaVenceFormateada, 
+          fec_vence_obj: fechaVenceObj 
+        }, emailNormalizado);
 
-      } catch (error) {
-        handleAccess("not_registered", null, emailRaw);
-      }
-    }
+      } catch (error) {
+        handleAccess("not_registered", null, emailRaw);
+      }
+    }
 
-    function handleAccess(status, userData, emailUser) {
-      const header = document.getElementById("plansHeader");
-      const container = document.getElementById("plansContainer");
-      const actionBox = document.getElementById("registrationActionBox");
-      const infoBox = document.getElementById("infoSuscripcion");
-      const alertBanner = document.getElementById("paymentAlertBanner");
-      const cards = document.querySelectorAll(".plan-card");
+    function handleAccess(status, userData, emailUser) {
+      const header = document.getElementById("plansHeader");
+      const container = document.getElementById("plansContainer");
+      const actionBox = document.getElementById("registrationActionBox");
+      const infoBox = document.getElementById("infoSuscripcion");
+      const alertBanner = document.getElementById("paymentAlertBanner");
+      const cards = document.querySelectorAll(".plan-card");
 
-      if (status === "not_registered") {
-        header.classList.add("hidden");
-        container.classList.add("hidden");
-        alertBanner.classList.add("hidden");
-        infoBox.style.display = "none";
+      if (status === "not_registered") {
+        header.classList.add("hidden");
+        container.classList.add("hidden");
+        alertBanner.classList.add("hidden");
+        infoBox.style.display = "none";
 
-        actionBox.innerHTML = `
-          <h2>Correo No Registrado</h2>
-          <p>El correo <strong>${emailUser || 'seleccionado'}</strong> no se encuentra activo en nuestro sistema.<br><br>Si acabas de completar tu registro, la activación puede tardar unas horas. De lo contrario, solicita tu acceso a continuación.</p>
-          <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-            <button class="btn-columba" onclick="abrirVentanaRegistro()">Registro de Acceso</button>
-            <a href="#" onclick="cambiarCuentaGoogle(event)" style="color:#5f6368; font-size:0.85rem; text-decoration:underline; margin-top:8px;">Probar con otra cuenta de Google</a>
-          </div>
-        `;
-        actionBox.style.display = "block";
-        return;
-      }
+        actionBox.innerHTML = `
+          <h2>Correo No Registrado</h2>
+          <p>El correo <strong>${emailUser || 'seleccionado'}</strong> no se encuentra activo en nuestro sistema.<br><br>Si acabas de completar tu registro, la activación puede tardar unas horas. De lo contrario, solicita tu acceso a continuación.</p>
+          <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
+            <button class="btn-columba" onclick="abrirVentanaRegistro()">Registro de Acceso</button>
+            <a href="#" onclick="cambiarCuentaGoogle(event)" style="color:#5f6368; font-size:0.85rem; text-decoration:underline; margin-top:8px;">Probar con otra cuenta de Google</a>
+          </div>
+        `;
+        actionBox.style.display = "block";
+        return;
+      }
 
-      if (status === "registered" && userData) {
-        actionBox.style.display = "none";
-        
-        header.classList.remove("hidden");
-        container.classList.remove("hidden");
+      if (status === "registered" && userData) {
+        actionBox.style.display = "none";
+        
+        header.classList.remove("hidden");
+        container.classList.remove("hidden");
 
-        const estado = userData.estado ? userData.estado.trim().toLowerCase() : "";
-        const action = userData.action ? userData.action.trim().toLowerCase() : "";
-        const fecVenceStr = userData.fec_vence || "N/A";
-        let diasRestantes = 0;
-        let puedeComprar = false;
+        const estado = userData.estado ? userData.estado.trim().toLowerCase() : "";
+        const action = userData.action ? userData.action.trim().toLowerCase() : "";
+        const fecVenceStr = userData.fec_vence || "N/A";
+        let diasRestantes = 0;
+        let puedeComprar = false;
 
-        const estadosValidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
-        const esActivo = estadosValidos.includes(estado) || estadosValidos.includes(action);
+        const estadosValidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
+        const esActivo = estadosValidos.includes(estado) || estadosValidos.includes(action);
 
-        if (esActivo && userData.fec_vence_obj) {
-          const hoy = new Date();
-          const fechaVencimiento = new Date(userData.fec_vence_obj);
-          hoy.setHours(0, 0, 0, 0);
-          fechaVencimiento.setHours(0, 0, 0, 0);
-          diasRestantes = Math.ceil((fechaVencimiento - hoy) / (1000 * 60 * 60 * 24));
-        }
+        if (esActivo && userData.fec_vence_obj) {
+          const hoy = new Date();
+          const fechaVencimiento = new Date(userData.fec_vence_obj);
+          hoy.setHours(0, 0, 0, 0);
+          fechaVencimiento.setHours(0, 0, 0, 0);
+          diasRestantes = Math.ceil((fechaVencimiento - hoy) / (1000 * 60 * 60 * 24));
+        }
 
-        if (!esActivo) {
-          puedeComprar = true;
-          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Cuenta Inactiva:</strong> Selecciona un plan a continuación para activar tu servicio.</p>`;
-          infoBox.style.background = "#fff3cd";
-          infoBox.style.color = "#856404";
-          infoBox.style.border = "1px solid #ffeeba";
-          infoBox.style.display = "block";
-        } else if (diasRestantes <= 3) {
-          puedeComprar = true;
-          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Renovación Disponible:</strong> Tu suscripción vence en ${diasRestantes} días (${fecVenceStr}). Ya puedes realizar tu renovación.</p>`;
-          infoBox.style.background = "#e8f0fe";
-          infoBox.style.color = "#1a73e8";
-          infoBox.style.border = "1px solid #c2e7ff";
-          infoBox.style.display = "block";
-        } else {
-          puedeComprar = false;
-          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Suscripción Activa (${userData.version || 'General'}):</strong> Vigente hasta el ${fecVenceStr} (Quedan ${diasRestantes} días).<br><small>Las opciones de compra están deshabilitadas para evitar pagos duplicados.</small></p>`;
-          infoBox.style.background = "#d4edda";
-          infoBox.style.color = "#155724";
-          infoBox.style.border = "1px solid #c3e6cb";
-          infoBox.style.display = "block";
-        }
+        if (!esActivo) {
+          puedeComprar = true;
+          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Cuenta Inactiva:</strong> Selecciona un plan a continuación para activar tu servicio.</p>`;
+          infoBox.style.background = "#fff3cd";
+          infoBox.style.color = "#856404";
+          infoBox.style.border = "1px solid #ffeeba";
+          infoBox.style.display = "block";
+        } else if (diasRestantes <= 3) {
+          puedeComprar = true;
+          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Renovación Disponible:</strong> Tu suscripción vence en ${diasRestantes} días (${fecVenceStr}). Ya puedes realizar tu renovación.</p>`;
+          infoBox.style.background = "#e8f0fe";
+          infoBox.style.color = "#1a73e8";
+          infoBox.style.border = "1px solid #c2e7ff";
+          infoBox.style.display = "block";
+        } else {
+          puedeComprar = false;
+          infoBox.innerHTML = `<p style="margin:0; font-size:0.95rem;"><strong>Suscripción Activa (${userData.version || 'General'}):</strong> Vigente hasta el ${fecVenceStr} (Quedan ${diasRestantes} días).<br><small>Las opciones de compra están deshabilitadas para evitar pagos duplicados.</small></p>`;
+          infoBox.style.background = "#d4edda";
+          infoBox.style.color = "#155724";
+          infoBox.style.border = "1px solid #c3e6cb";
+          infoBox.style.display = "block";
+        }
 
-        if (puedeComprar) {
-          alertBanner.classList.remove("hidden");
-        } else {
-          alertBanner.classList.add("hidden");
-        }
+        if (puedeComprar) {
+          alertBanner.classList.remove("hidden");
+        } else {
+          alertBanner.classList.add("hidden");
+        }
 
-        cards.forEach(c => {
-          if (puedeComprar) {
-            c.classList.remove("blocked");
-          } else {
-            c.classList.add("blocked");
-          }
-        });
-      }
-    }
-  </script>
+        cards.forEach(c => {
+          if (puedeComprar) {
+            c.classList.remove("blocked");
+          } else {
+            c.classList.add("blocked");
+          }
+        });
+      }
+    }
+  </script>
 </body>
 
 </html>
