@@ -485,18 +485,32 @@
       }
     }
 
+    /**
+     * Extractor universal y seguro para campos de la API REST de Firestore.
+     * Soporta string, integer, double, boolean y timestamp sin importar cómo se haya guardado el campo.
+     */
+    function extraerValorFirestore(field) {
+      if (!field) return "";
+      if (field.stringValue !== undefined) return field.stringValue;
+      if (field.integerValue !== undefined) return String(field.integerValue);
+      if (field.doubleValue !== undefined) return String(field.doubleValue);
+      if (field.booleanValue !== undefined) return String(field.booleanValue);
+      if (field.timestampValue !== undefined) return field.timestampValue;
+      return "";
+    }
+
     async function ejecutarVerificacionDeAcceso(emailLimpio) {
       const emailRaw = emailLimpio.trim();
       const emailNormalizado = emailRaw.toLowerCase();
       const projectId = "columbanotebook-pro"; 
       
-      let urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailNormalizado)}`;
+      let urlFirestore = `https://firestore.googleapis.com/v1/projects/\({projectId}/databases/(default)/documents/usuarios_autorizados/\){encodeURIComponent(emailNormalizado)}`;
 
       try {
         let respuesta = await fetch(urlFirestore);
 
         if (!respuesta.ok && emailRaw !== emailNormalizado) {
-          urlFirestore = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/usuarios_autorizados/${encodeURIComponent(emailRaw)}`;
+          urlFirestore = `https://firestore.googleapis.com/v1/projects/\({projectId}/databases/(default)/documents/usuarios_autorizados/\){encodeURIComponent(emailRaw)}`;
           respuesta = await fetch(urlFirestore);
         }
 
@@ -513,14 +527,15 @@
           return;
         }
 
-        const emailVal = campos.email?.stringValue || emailRaw;
-        const actionVal = campos.action?.stringValue || "";
-        const versionVal = campos.version?.stringValue || "";
-        const tipoVal = campos.tipo?.stringValue || "";
-        const customerIdVal = campos.customer_id?.stringValue || "";
-        const priceIdVal = campos.price_id?.stringValue || "";
+        // Extracción robusta utilizando el helper universal
+        const emailVal = extraerValorFirestore(campos.email) || emailRaw;
+        const actionVal = extraerValorFirestore(campos.action);
+        const versionVal = extraerValorFirestore(campos.version);
+        const tipoVal = extraerValorFirestore(campos.tipo);
+        const customerIdVal = extraerValorFirestore(campos.customer_id);
+        const priceIdVal = extraerValorFirestore(campos.price_id);
 
-        let estadoFila = campos.estado?.stringValue?.trim().toLowerCase() || "";
+        let estadoFila = extraerValorFirestore(campos.estado).trim().toLowerCase();
         const actionValLower = actionVal.trim().toLowerCase();
         const estadosActivosPermitidos = ["complete", "completed", "active", "activo", "autorizado", "authorized", "approved", "paid", "suscrito"];
 
@@ -533,7 +548,7 @@
         let fechaVenceFormateada = "";
         let fechaVenceObj = null;
 
-        const fecVenceRaw = campos.fec_vence?.timestampValue || campos.fec_vence?.stringValue;
+        const fecVenceRaw = campos.fec_vence?.timestampValue || campos.fec_vence?.stringValue || extraerValorFirestore(campos.fec_vence);
 
         if (fecVenceRaw) {
           fechaVenceObj = new Date(fecVenceRaw);
@@ -543,12 +558,12 @@
         }
 
         if (fechaVenceObj && !isNaN(fechaVenceObj.getTime())) {
-          fechaVenceFormateada = `${String(fechaVenceObj.getDate()).padStart(2, '0')}/${String(fechaVenceObj.getMonth() + 1).padStart(2, '0')}/${fechaVenceObj.getFullYear()}`;
-        } else if (campos.fec_vence?.stringValue) {
-          fechaVenceFormateada = campos.fec_vence.stringValue;
+          fechaVenceFormateada = `\({String(fechaVenceObj.getDate()).padStart(2, '0')}/\){String(fechaVenceObj.getMonth() + 1).padStart(2, '0')}/${fechaVenceObj.getFullYear()}`;
+        } else if (fecVenceRaw) {
+          fechaVenceFormateada = String(fecVenceRaw);
         }
 
-        const fecUltActRaw = campos.fec_ult_act?.timestampValue || campos.fec_ult_act?.stringValue || "";
+        const fecUltActRaw = campos.fec_ult_act?.timestampValue || campos.fec_ult_act?.stringValue || extraerValorFirestore(campos.fec_ult_act) || "";
 
         const datosCompletos = {
           email: emailVal,
